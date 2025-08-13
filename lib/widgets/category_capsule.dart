@@ -6,12 +6,18 @@ class CategoryCapsule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: isDarkMode
+            ? Theme.of(context).colorScheme.surface
+            : Colors.grey.shade100,
         borderRadius: BorderRadius.circular(15.0),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+          color: isDarkMode
+              ? Theme.of(context).colorScheme.outline.withOpacity(0.3)
+              : Colors.grey.shade300,
           width: 1,
         ),
       ),
@@ -20,7 +26,9 @@ class CategoryCapsule extends StatelessWidget {
         child: Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: isDarkMode
+                ? Theme.of(context).colorScheme.onSurface
+                : Colors.grey.shade700,
             fontWeight: FontWeight.w500,
           ),
         ),
