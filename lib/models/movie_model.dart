@@ -4,6 +4,7 @@ class MovieModel {
   final int? id;
   final String? originalLanguage;
   final String? originalTitle;
+  final String? title;
   final String? overview;
   final double? popularity;
   final String? posterPath;
@@ -18,6 +19,7 @@ class MovieModel {
     this.id,
     this.originalLanguage,
     this.originalTitle,
+    this.title,
     this.overview,
     this.popularity,
     this.posterPath,
@@ -34,6 +36,7 @@ class MovieModel {
       id: json['id'],
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
+      title: json['title'],
       overview: json['overview'],
       popularity: json['popularity'].toDouble(),
       posterPath: json['poster_path'],

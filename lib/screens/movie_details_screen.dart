@@ -54,7 +54,7 @@ class MovieDetailsScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    movie.originalTitle ?? "Unknown Title",
+                    movie.title ?? "Unknown Title",
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onSurface,

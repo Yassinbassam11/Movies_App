@@ -52,7 +52,7 @@ class _MovieCardState extends State<MovieCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.movie.originalTitle ?? "Unknown Title",
+                      widget.movie.title ?? "Unknown Title",
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
