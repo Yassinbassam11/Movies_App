@@ -8,10 +8,7 @@ class FavouriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        title: const Text('Favourite Movies'),
-      ),
+      appBar: AppBar(title: const Text('Favourite Movies')),
       body: SafeArea(
         child: Center(
           child: ValueListenableBuilder(
@@ -21,7 +18,9 @@ class FavouriteScreen extends StatelessWidget {
                 return Center(
                   child: Text(
                     'No favourite movies yet!',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
                 );
               }

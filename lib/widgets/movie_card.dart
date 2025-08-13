@@ -53,20 +53,25 @@ class _MovieCardState extends State<MovieCard> {
                   children: [
                     Text(
                       widget.movie.originalTitle ?? "Unknown Title",
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(height: 10.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.star, color: Colors.yellow[600]),
+                        Icon(Icons.star, color: Colors.amber),
                         SizedBox(width: 4.0),
                         Text(
                           '${widget.movie.voteAverage}/10',
-                          style: TextStyle(color: Colors.grey[600]),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withOpacity(0.7),
+                              ),
                         ),
                       ],
                     ),
@@ -87,11 +92,19 @@ class _MovieCardState extends State<MovieCard> {
                     SizedBox(height: 10.0),
                     Row(
                       children: [
-                        Icon(Icons.access_time, color: Colors.teal),
+                        Icon(
+                          Icons.access_time,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                         SizedBox(width: 4.0),
                         Text(
                           widget.movie.releaseDate ?? "Unknown Release Date",
-                          style: TextStyle(color: Colors.grey[600]),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withOpacity(0.7),
+                              ),
                         ),
                         Spacer(),
                         IconButton(
@@ -101,8 +114,8 @@ class _MovieCardState extends State<MovieCard> {
                                 : Icons.favorite_border,
                           ),
                           color: widget.movie.isFavorite
-                              ? Colors.red
-                              : Colors.white,
+                              ? Theme.of(context).colorScheme.error
+                              : Theme.of(context).colorScheme.onSurface,
                           onPressed: () {
                             setState(() {
                               if (widget.movie.isFavorite) {

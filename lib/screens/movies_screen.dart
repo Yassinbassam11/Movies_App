@@ -27,7 +27,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.grey[900],
         title: const Text('Popular Movies'),
         actions: [
           IconButton(
@@ -37,7 +36,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 MaterialPageRoute(builder: (context) => FavouriteScreen()),
               );
             },
-            icon: const Icon(Icons.favorite, color: Colors.red),
+            icon: Icon(
+              Icons.favorite,
+              color: Theme.of(context).colorScheme.error,
+            ),
           ),
           IconButton(
             onPressed: () {
