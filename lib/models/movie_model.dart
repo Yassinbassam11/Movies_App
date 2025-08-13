@@ -1,19 +1,3 @@
-// class MovieModel2 {
-//   final String title;
-//   final String imageUrl;
-//   final String duration;
-//   final List<String> genres;
-//   final double rating;
-
-//   MovieModel2({
-//     required this.title,
-//     required this.imageUrl,
-//     required this.duration,
-//     required this.genres,
-//     required this.rating,
-//   });
-// }
-
 class MovieModel {
   final bool? adult;
   final String? backdropPath;
