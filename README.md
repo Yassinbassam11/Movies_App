@@ -1,15 +1,17 @@
 # Movies App
 
-A simple Flutter application that lists popular movies from **The Movie Database (TMDB)**, lets you view detailed information, toggle dark mode, and mark movies as favourites (in–memory for the current session).
+A beautiful Flutter application that displays popular movies from **The Movie Database (TMDB)** with modern UI/UX design, dark/light theme support, and favorite movie management.
 
 ## ✨ Features
 
-- Fetch popular movies from TMDB API (HTTP + JSON parsing)
-- Movie list with poster, rating, release date
-- Hero animation into a detailed movie view
-- Dark / Light mode toggle (runtime via `ValueNotifier`)
-- Mark/unmark favourites (kept in memory only)
-- Basic responsive layout (mobile focus)
+- 🎬 Fetch and display popular movies from TMDB API
+- 🖼️ Movie list with high-quality posters, ratings, and release dates
+- 🎭 Hero animations for smooth transitions to detailed movie views
+- 🌓 Dark/Light mode toggle with beautiful theme transitions
+- ❤️ Mark/unmark movies as favorites (in-memory for current session)
+- 🏷️ Category tags with adaptive theming (grey for light theme, dark surface for dark theme)
+- 📱 Responsive layout optimized for mobile devices
+- 🎨 Modern Material Design 3 principles
 
 ## 🏗️ Architecture & State
 
@@ -17,12 +19,22 @@ Very lightweight: manual state management using `ValueNotifier` instances inside
 
 ```
 lib/
-  main.dart                # App entry + theme + global appBrain
-  view_model/app_brain.dart# Holds ValueNotifiers (movies, favourites, dark mode)
+  main.dart                # App entry + theme configuration + global appBrain
+  view_model/
+    app_brain.dart         # State management with ValueNotifiers (movies, favourites, dark mode)
   services/                # API layer & constants
-  models/                  # Data models (MovieModel)
-  screens/                 # UI screens (list, details, favourites)
-  widgets/                 # Reusable presentation widgets
+    api_services.dart      # HTTP service for TMDB API calls
+    api_constants.dart     # API configuration and endpoints
+  models/                  # Data models
+    movie_model.dart       # Movie data structure with JSON serialization
+  screens/                 # UI screens
+    movies_screen.dart     # Main movie list screen
+    movie_details_screen.dart # Detailed movie view
+    favourite_screen.dart  # Favorites list screen
+  widgets/                 # Reusable UI components
+    movie_card.dart        # Movie list item with poster and info
+    category_capsule.dart  # Category tags with adaptive theming
+  constants/               # App-wide constants
   assets/images/           # Local image assets
 ```
 
@@ -65,12 +77,13 @@ The project includes scaffolding for: Android, iOS, Web, Windows, macOS, Linux. 
 
 ## 🧩 Key Widgets / Screens
 
-| Component | Purpose |
-|-----------|---------|
-| `MoviesScreen` | Lists fetched movies + actions (favourites nav, dark mode) |
-| `FavouriteScreen` | Shows in-memory favourite list |
-| `MovieDetailsScreen` | Poster hero + overview + meta info |
-| `MovieCard` | Row card with poster, rating, favourite toggle |
+| Component | Purpose | Recent Updates |
+|-----------|---------|----------------|
+| `MoviesScreen` | Lists fetched movies + actions (favourites nav, dark mode) | Enhanced theme toggle UI |
+| `FavouriteScreen` | Shows in-memory favourite list | - |
+| `MovieDetailsScreen` | Poster hero + overview + meta info | - |
+| `MovieCard` | Row card with poster, rating, favourite toggle | - |
+| `CategoryCapsule` | Movie category tags | **New**: Adaptive theming, grey color scheme for light mode |
 
 ## ❤️ Favourites Logic
 
@@ -81,9 +94,23 @@ The project includes scaffolding for: Android, iOS, Web, Windows, macOS, Linux. 
 - No offline cache
 - Genre chips are static placeholders
 
-## 🌗 Dark Mode
+## � UI/UX Improvements
 
-Dark mode controlled by `appBrain.isDarkMode` (ValueNotifier). Toggled from the `MoviesScreen` AppBar action.
+### Recent Updates (August 2025)
+- **Enhanced Category Capsules**: Improved theming for category tags
+  - Light theme: Subtle grey background (`Colors.grey.shade100`) with dark grey text
+  - Dark theme: Maintains surface color with outline borders
+  - Better contrast and visual hierarchy
+- **Material Design 3**: Updated color schemes and component styling
+- **Adaptive Theming**: Components automatically adapt to current theme mode
+
+## �🌗 Dark Mode
+
+Dark mode is elegantly controlled by `appBrain.isDarkMode` (ValueNotifier) and can be toggled from the `MoviesScreen` AppBar. The app features:
+- Smooth theme transitions
+- Adaptive component colors
+- Consistent visual hierarchy across themes
+- Material Design 3 color schemes
 
 ## 🧪 Testing
 
@@ -99,34 +126,65 @@ No tests yet. Suggested initial tests:
 
 ## 🗺️ Roadmap / Ideas
 
-- Persist favourites (e.g., `shared_preferences` or `hive`)
-- Proper genre mapping from API response
-- Infinite scroll / pagination
-- Search movies
-- Error + loading states (skeletons / shimmer)
-- Pull to refresh
-- Unit & widget tests
-- i18n using Flutter localization
+### Short Term
+- 💾 Persist favourites using `shared_preferences` or `hive`
+- 🏷️ Proper genre mapping from API response (replace static category chips)
+- 🔄 Pull to refresh functionality
+- ⚡ Loading states with skeletons/shimmer effects
+
+### Medium Term  
+- 🔍 Search movies functionality
+- 📄 Infinite scroll/pagination for movie lists
+- 🌐 i18n using Flutter localization
+- 🧪 Unit & widget tests
+- 🎭 Enhanced animations and micro-interactions
+
+### Long Term
+- 🎥 Movie trailers and video integration
+- 👤 User profiles and cloud sync
+- 📊 Movie recommendations
+- 🔐 Advanced security and authentication
 
 ## 📦 Dependencies
 
-| Package | Usage |
-|---------|-------|
-| `http`  | REST API calls |
-| `flutter` (SDK) | UI framework |
+| Package | Version | Usage |
+|---------|---------|-------|
+| `http` | `^1.5.0` | REST API calls to TMDB |
+| `flutter` | SDK | UI framework |
+| `flutter_lints` | `^5.0.0` | Code quality and linting |
+
+### Flutter SDK Requirements
+- **Minimum**: Flutter 3.8.1+
+- **Dart**: Compatible with null safety
+- **Platforms**: Android, iOS, Web, Windows, macOS, Linux
+
+---
+
+## 📸 Screenshots
+
+*Add screenshots of your app in both light and dark modes to showcase the beautiful UI!*
 
 ## 🤝 Contributing
 
-1. Fork & clone
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Make changes & format (`dart format .` / `flutter analyze`)
-4. Commit & push
-5. Open a PR
+1. 🍴 Fork & clone the repository
+2. 🌿 Create a feature branch: `git checkout -b feature/your-feature-name`
+3. ✨ Make changes & ensure code quality (`dart format .` & `flutter analyze`)
+4. ✅ Test your changes thoroughly
+5. 📝 Commit with clear messages & push to your fork
+6. 🚀 Open a Pull Request with detailed description
+
+### Development Guidelines
+- Follow Flutter/Dart style guidelines
+- Ensure responsive design works across devices
+- Test both light and dark themes
+- Update documentation for new features
 
 ## 📝 License
 
-Add a suitable license (e.g., MIT) if you plan to open source. Currently unspecified.
+This project is available under the MIT License. See the LICENSE file for more details.
 
 ---
-Made with Flutter. Enjoy hacking on it! 🚀
+
+**Made with ❤️ and Flutter**  
+*A modern movie discovery experience* 🎬✨
 
