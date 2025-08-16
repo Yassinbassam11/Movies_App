@@ -4,6 +4,7 @@ import 'package:movies_app/models/movie_model.dart';
 import 'package:movies_app/screens/movie_details_screen.dart';
 import 'package:movies_app/widgets/category_capsule.dart';
 
+// ignore: must_be_immutable
 class MovieCard extends StatefulWidget {
   MovieCard({super.key, required this.movie, required this.isFavorite});
   final MovieModel movie;
