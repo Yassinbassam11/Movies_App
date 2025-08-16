@@ -5,6 +5,8 @@ import 'package:movies_app/view_model/app_brain.dart';
 final appBrain = AppBrain();
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  appBrain.initialize();
   runApp(const MainApp());
 }
 

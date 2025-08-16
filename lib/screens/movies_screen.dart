@@ -3,6 +3,7 @@ import 'package:movies_app/main.dart';
 import 'package:movies_app/screens/favourite_screen.dart';
 import 'package:movies_app/services/api_services.dart';
 import 'package:movies_app/widgets/movie_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MoviesScreen extends StatefulWidget {
   const MoviesScreen({super.key});
@@ -50,10 +51,13 @@ class _MoviesScreenState extends State<MoviesScreen> {
             ),
           ),
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               if (appBrain.isDarkMode.value) {
                 appBrain.isDarkMode.value = false;
                 setState(() {});
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                await prefs.setBool('isDarkMode', false);
               } else {
                 appBrain.isDarkMode.value = true;
                 setState(() {});
