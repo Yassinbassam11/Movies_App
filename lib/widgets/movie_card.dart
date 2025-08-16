@@ -41,10 +41,43 @@ class _MovieCardState extends State<MovieCard> {
                   height: 140,
                   child: Hero(
                     tag: widget.movie.id.toString(),
-                    child: Image.network(
-                      "http://image.tmdb.org/t/p/w500${widget.movie.backdropPath ?? "Placeholder"}",
-                      fit: BoxFit.cover,
-                    ),
+                    child:
+                        widget.movie.backdropPath != null &&
+                            widget.movie.backdropPath!.isNotEmpty
+                        ? Image.network(
+                            "http://image.tmdb.org/t/p/w500${widget.movie.backdropPath}",
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value:
+                                      loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                            (loadingProgress
+                                                    .expectedTotalBytes ??
+                                                1)
+                                      : null,
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey,
+                                child: const Icon(Icons.error),
+                              );
+                            },
+                            fit: BoxFit.cover,
+                          )
+                        : Container(
+                            color: Colors.grey[300],
+                            child: const Icon(
+                              Icons.image_not_supported,
+                              size: 48,
+                              color: Colors.grey,
+                            ),
+                            width: 90,
+                            height: 140,
+                          ),
                   ),
                 ),
               ),

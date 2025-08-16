@@ -5,4 +5,5 @@ class AppBrain {
   ValueNotifier<List<MovieModel>> movies = ValueNotifier([]);
   ValueNotifier<List<MovieModel>> favouriteMovies = ValueNotifier([]);
   ValueNotifier<bool> isDarkMode = ValueNotifier(true);
+  int currentPage = 1;
 }

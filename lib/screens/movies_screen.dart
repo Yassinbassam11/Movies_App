@@ -12,13 +12,21 @@ class MoviesScreen extends StatefulWidget {
 }
 
 class _MoviesScreenState extends State<MoviesScreen> {
+  final ScrollController _scrollController = ScrollController();
   void loadMovies() async {
-    await ApiServices.sendRequest();
+    await ApiServices.sendRequest(appBrain.currentPage);
     setState(() {});
   }
 
   @override
   void initState() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        appBrain.currentPage++;
+        ApiServices.sendRequest(appBrain.currentPage);
+      }
+    });
     loadMovies();
     super.initState();
   }
@@ -64,6 +72,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                   valueListenable: appBrain.movies,
                   builder: (context, value, child) {
                     return ListView.builder(
+                      controller: _scrollController,
                       itemCount: value.length,
                       itemBuilder: (context, index) {
                         return ValueListenableBuilder(

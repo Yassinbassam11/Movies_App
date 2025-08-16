@@ -6,9 +6,9 @@ import 'package:movies_app/models/movie_model.dart';
 import 'package:movies_app/services/api_constants.dart';
 
 class ApiServices {
-  static Future<void> sendRequest() async {
+  static Future<void> sendRequest(int? page) async {
     // Implementation for sending API requests
-    final url = Uri.parse(ApiConstants.popularMoviesUrl);
+    final url = Uri.parse("${ApiConstants.popularMoviesUrl}${page ?? 1}");
     final response = await http.get(
       url,
       headers: {'Authorization': 'Bearer ${ApiConstants.apiKey}'},
@@ -20,7 +20,7 @@ class ApiServices {
       final List<MovieModel> moviesModel = moviesList
           .map((movie) => MovieModel.fromJson(movie))
           .toList();
-      appBrain.movies.value = moviesModel;
+      appBrain.movies.value = [...appBrain.movies.value, ...moviesModel];
     } else {
       // Handle error response
     }
