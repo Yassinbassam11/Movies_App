@@ -11,6 +11,7 @@ class MovieModel {
   final String? releaseDate;
   final double? voteAverage;
   final int? voteCount;
+  final List<int>? genre_ids;
 
   MovieModel({
     this.adult,
@@ -25,6 +26,7 @@ class MovieModel {
     this.releaseDate,
     this.voteAverage,
     this.voteCount,
+    this.genre_ids,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,9 @@ class MovieModel {
       releaseDate: json['release_date'],
       voteAverage: json['vote_average'].toDouble(),
       voteCount: json['vote_count'],
+      genre_ids: (json['genre_ids'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
     );
   }
 }

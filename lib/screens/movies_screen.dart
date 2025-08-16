@@ -28,6 +28,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
         ApiServices.sendRequest(appBrain.currentPage);
       }
     });
+    ApiServices.fetchMovieGenres();
     loadMovies();
     super.initState();
   }

@@ -13,6 +13,12 @@ A beautiful Flutter application that displays popular movies from **The Movie Da
 - 📱 Responsive layout optimized for mobile devices
 - 🎨 Modern Material Design 3 principles
 
+## 🛠️ Recent Fixes & Improvements
+
+- August 2025
+  - Added null-safety guards in `MovieCard` to avoid runtime crashes when `backdropPath` or `genre_ids` are null.
+  - Minor stability and polish updates.
+
 ## 🏗️ Architecture & State
 
 Very lightweight: manual state management using `ValueNotifier` instances inside a singleton-like `AppBrain` (created in `main.dart`). No external state management libraries.
@@ -94,7 +100,7 @@ The project includes scaffolding for: Android, iOS, Web, Windows, macOS, Linux. 
 - No offline cache
 - Genre chips are static placeholders
 
-## � UI/UX Improvements
+## UI/UX Improvements
 
 ### Recent Updates (August 2025)
 - **Enhanced Category Capsules**: Improved theming for category tags
@@ -104,7 +110,7 @@ The project includes scaffolding for: Android, iOS, Web, Windows, macOS, Linux. 
 - **Material Design 3**: Updated color schemes and component styling
 - **Adaptive Theming**: Components automatically adapt to current theme mode
 
-## �🌗 Dark Mode
+## 🌗 Dark Mode
 
 Dark mode is elegantly controlled by `appBrain.isDarkMode` (ValueNotifier) and can be toggled from the `MoviesScreen` AppBar. The app features:
 - Smooth theme transitions
@@ -187,4 +193,17 @@ This project is available under the MIT License. See the LICENSE file for more d
 
 **Made with ❤️ and Flutter**  
 *A modern movie discovery experience* 🎬✨
+
+---
+
+## 🧰 Troubleshooting
+
+- Error: `_TypeError (Null check operator used on a null value)`
+  - Cause: Using `!` on a field that is null (e.g., `movie.backdropPath!` or `movie.genre_ids!`).
+  - Fix: Ensure null-aware checks or defaults. Implemented in `lib/widgets/movie_card.dart` by checking `backdropPath` for null/empty and using `(genre_ids ?? [])`.
+  - If you still see the error, run a clean build:
+    - PowerShell
+      ```powershell
+      flutter clean; flutter pub get; flutter run --dart-define TMDB_API_KEY=YOUR_TMDB_READ_ACCESS_TOKEN
+      ```
 

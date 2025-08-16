@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/main.dart';
 import 'package:movies_app/models/movie_model.dart';
 import 'package:movies_app/widgets/category_capsule.dart';
 
@@ -87,11 +88,12 @@ class MovieDetailsScreen extends StatelessWidget {
                   Wrap(
                     spacing: 8.0,
                     runSpacing: 6.0,
-                    children: [
-                      CategoryCapsule(label: "Action"),
-                      CategoryCapsule(label: "Drama"),
-                      CategoryCapsule(label: "Thriller"),
-                    ],
+                    children: (movie.genre_ids ?? []).map((genreId) {
+                      final genreName = appBrain.movieGenres[genreId];
+                      return genreName != null
+                          ? CategoryCapsule(label: genreName)
+                          : Container();
+                    }).toList(),
                   ),
                   SizedBox(height: 10.0),
                   Text(

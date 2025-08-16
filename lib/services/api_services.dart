@@ -25,4 +25,27 @@ class ApiServices {
       // Handle error response
     }
   }
+
+  static Future<void> fetchMovieGenres() async {
+    // Implementation for fetching movie genres
+    final String stringUrl =
+        "https://api.themoviedb.org/3/genre/movie/list?language=en";
+    final Map<String, String> headers = {
+      'Authorization': 'Bearer ${ApiConstants.apiKey}',
+    };
+    final url = Uri.parse(stringUrl);
+    final response = await http.get(url, headers: headers);
+    if (response.statusCode == 200) {
+      // Handle successful response
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final genresJson = data['genres'] as List<dynamic>;
+      Map<int, String> genres = {};
+      for (var genre in genresJson) {
+        genres[genre['id']] = genre['name'];
+      }
+      appBrain.movieGenres = genres;
+    } else {
+      // Handle error response
+    }
+  }
 }

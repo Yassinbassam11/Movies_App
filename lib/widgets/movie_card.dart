@@ -42,8 +42,8 @@ class _MovieCardState extends State<MovieCard> {
                   child: Hero(
                     tag: widget.movie.id.toString(),
                     child:
-                        widget.movie.backdropPath != null &&
-                            widget.movie.backdropPath!.isNotEmpty
+                        (widget.movie.backdropPath != null &&
+                            widget.movie.backdropPath!.isNotEmpty)
                         ? Image.network(
                             "http://image.tmdb.org/t/p/w500${widget.movie.backdropPath}",
                             loadingBuilder: (context, child, loadingProgress) {
@@ -70,13 +70,13 @@ class _MovieCardState extends State<MovieCard> {
                           )
                         : Container(
                             color: Colors.grey[300],
+                            width: 90,
+                            height: 140,
                             child: const Icon(
                               Icons.image_not_supported,
                               size: 48,
                               color: Colors.grey,
                             ),
-                            width: 90,
-                            height: 140,
                           ),
                   ),
                 ),
@@ -113,16 +113,12 @@ class _MovieCardState extends State<MovieCard> {
                     Wrap(
                       spacing: 8.0,
                       runSpacing: 6.0,
-                      // children: [
-                      //   CategoryCapsule(label: "Action"),
-                      //   CategoryCapsule(label: "Drama"),
-                      //   CategoryCapsule(label: "Thriller"),
-                      // ],
-                      children: [
-                        CategoryCapsule(label: "Action"),
-                        CategoryCapsule(label: "Drama"),
-                        CategoryCapsule(label: "Thriller"),
-                      ],
+                      children: (widget.movie.genre_ids ?? []).map((genreId) {
+                        final genreName = appBrain.movieGenres[genreId];
+                        return genreName != null
+                            ? CategoryCapsule(label: genreName)
+                            : Container();
+                      }).toList(),
                     ),
                     SizedBox(height: 10.0),
                     Row(
