@@ -11,7 +11,6 @@ class MovieModel {
   final String? releaseDate;
   final double? voteAverage;
   final int? voteCount;
-  bool isFavorite;
 
   MovieModel({
     this.adult,
@@ -26,7 +25,6 @@ class MovieModel {
     this.releaseDate,
     this.voteAverage,
     this.voteCount,
-    this.isFavorite = false,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {

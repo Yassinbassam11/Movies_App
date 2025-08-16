@@ -5,8 +5,9 @@ import 'package:movies_app/screens/movie_details_screen.dart';
 import 'package:movies_app/widgets/category_capsule.dart';
 
 class MovieCard extends StatefulWidget {
-  const MovieCard({super.key, required this.movie});
+  MovieCard({super.key, required this.movie, required this.isFavorite});
   final MovieModel movie;
+  bool isFavorite;
 
   @override
   State<MovieCard> createState() => _MovieCardState();
@@ -109,27 +110,38 @@ class _MovieCardState extends State<MovieCard> {
                         Spacer(),
                         IconButton(
                           icon: Icon(
-                            widget.movie.isFavorite
+                            widget.isFavorite
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                           ),
-                          color: widget.movie.isFavorite
+                          color: widget.isFavorite
                               ? Theme.of(context).colorScheme.error
                               : Theme.of(context).colorScheme.onSurface,
                           onPressed: () {
                             setState(() {
-                              if (widget.movie.isFavorite) {
+                              if (widget.isFavorite) {
                                 // Handle unfavorite action
-                                widget.movie.isFavorite = false;
-                                appBrain.favouriteMovies.value.remove(
-                                  widget.movie,
-                                );
+                                widget.isFavorite = false;
+                                // appBrain.favouriteMovies.value.remove(
+                                //   widget.movie,
+                                // );
+                                appBrain.favouriteMovies.value = appBrain
+                                    .favouriteMovies
+                                    .value
+                                    .where(
+                                      (movie) => movie.id != widget.movie.id,
+                                    )
+                                    .toList();
                               } else {
                                 // Handle favorite action
-                                widget.movie.isFavorite = true;
-                                appBrain.favouriteMovies.value.add(
+                                widget.isFavorite = true;
+                                // appBrain.favouriteMovies.value.add(
+                                //   widget.movie,
+                                // );
+                                appBrain.favouriteMovies.value = [
+                                  ...appBrain.favouriteMovies.value,
                                   widget.movie,
-                                );
+                                ];
                               }
                             });
                           },

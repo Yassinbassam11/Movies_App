@@ -27,7 +27,10 @@ class FavouriteScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: favouriteMovies.length,
                 itemBuilder: (context, index) {
-                  return MovieCard(movie: favouriteMovies[index]);
+                  return MovieCard(
+                    movie: favouriteMovies[index],
+                    isFavorite: true,
+                  );
                 },
               );
             },

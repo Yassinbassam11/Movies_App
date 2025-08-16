@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
           theme: isDarkMode
               ? ThemeData.dark().copyWith(
                   appBarTheme: AppBarTheme(
+                    surfaceTintColor: Colors.transparent,
                     backgroundColor: Color(0xFF3f3f3f),
                     elevation: 0,
                   ),
@@ -36,6 +37,7 @@ class MainApp extends StatelessWidget {
                 )
               : ThemeData.light().copyWith(
                   appBarTheme: const AppBarTheme(
+                    surfaceTintColor: Colors.transparent,
                     backgroundColor: Color(0xFF8e8e8e), // Dark grey AppBar
                     foregroundColor: Colors.white,
                     elevation: 0,

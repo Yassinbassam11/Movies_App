@@ -66,7 +66,16 @@ class _MoviesScreenState extends State<MoviesScreen> {
                     return ListView.builder(
                       itemCount: value.length,
                       itemBuilder: (context, index) {
-                        return MovieCard(movie: value[index]);
+                        return ValueListenableBuilder(
+                          valueListenable: appBrain.favouriteMovies,
+                          builder: (context, value, child) {
+                            return MovieCard(
+                              movie: appBrain.movies.value[index],
+                              isFavorite: appBrain.favouriteMovies.value
+                                  .contains(appBrain.movies.value[index]),
+                            );
+                          },
+                        );
                       },
                     );
                   },
